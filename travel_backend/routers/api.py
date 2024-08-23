@@ -1,10 +1,9 @@
 from fastapi import APIRouter
+from travel_backend.controllers import user_controller
+from travel_backend.controllers import UserController
 
 router = APIRouter(
-    prefix="/api", tags=["api"], responses={404: {"description": "URL not found"}}
+    prefix="/api"
 )
 
-
-@router.get("/")
-def get():
-    return {"teste": "Ola"}
+router.include_router(UserController)
