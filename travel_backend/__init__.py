@@ -1,5 +1,4 @@
 from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
 
 from travel_backend.middlewares.cors_settings import CORSSettings
 from travel_backend.routers import api
