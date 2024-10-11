@@ -1,6 +1,6 @@
 services:
   db:
-    image: postgres:16.4-bullseye
+    image: postgres:17.0-bookworm
     restart: on-failure:3
     ports:
       - 5432:${POSTGRES_PORT}
