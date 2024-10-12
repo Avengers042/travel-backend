@@ -1,5 +1,5 @@
 from sqlmodel import Field
-from travel_backend.schemas.user.user_schema import UserSchema
+from schemas.user.user_schema import UserSchema
 
 
 class User(UserSchema, table=True):

@@ -1,6 +1,6 @@
 from fastapi.middleware.cors import CORSMiddleware
 
-from travel_backend.config.cors import ORIGINS_ALLOWED
+from config.cors import ORIGINS_ALLOWED
 
 
 class CORSSettings:

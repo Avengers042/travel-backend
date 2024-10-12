@@ -1,8 +1,8 @@
 from typing import Sequence
 from sqlmodel import Session, select
 
-from travel_backend.models.user import User
-from travel_backend.schemas.user.user_schema import UserSchema
+from models.user import User
+from schemas.user.user_schema import UserSchema
 
 
 def get_all_users(session: Session) -> Sequence[User]:

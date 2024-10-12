@@ -3,10 +3,10 @@ from fastapi import APIRouter, Depends, HTTPException
 from fastapi.responses import JSONResponse
 from sqlmodel import Session
 
-from travel_backend.database.connection import get_session
-from travel_backend.models.user import User
-from travel_backend.repositories import user_repository
-from travel_backend.schemas.user.user_schema import UserSchema
+from database.connection import get_session
+from models.user import User
+from repositories import user_repository
+from schemas.user.user_schema import UserSchema
 
 
 router = APIRouter(prefix="/users", tags=["users"])

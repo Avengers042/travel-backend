@@ -1,5 +1,5 @@
 from sqlmodel import SQLModel
-from travel_backend.database.connection import engine
-from travel_backend.models import user
+from database.connection import engine
+from models import user
 
 SQLModel.metadata.create_all(engine)

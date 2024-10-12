@@ -1,7 +1,7 @@
 from os import getenv
 from pydantic_core import MultiHostUrl
 
-from travel_backend.config.envs import load_envs
+from config.envs import load_envs
 
 load_envs()
 
