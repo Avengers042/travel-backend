@@ -5,6 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "clipspy>=1.0.4",
     "fastapi[standard]>=0.115.0",
     "psycopg2-binary>=2.9.9",
     "python-dotenv>=1.0.1",
