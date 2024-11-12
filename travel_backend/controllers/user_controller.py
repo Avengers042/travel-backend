@@ -28,18 +28,21 @@ def user_preferences(preferences: Preferences):
     responses={200: {"description": "Problemas nos servidores"}},
 )
 def user_preferences_recommendation(body: Any):
-    codeAsProperties = ['natureza', 'cultura', 'cultura e historia', 'aventura', 'vida noturna', 'hotel', 'airbnb', 'hostel', 'acampamento', 'equatorial', 'tropical', 'subtropical', 'massa', 'hamburger', 'sushi', 'churrasco', 'sobremesas']
+    print ('testeeeeeee')
+    codeAsProperties = ['natureza', 'cultura', 'aventura', 'vidanoturna', 'hotel', 'airbnb', 'hostel', 'acampamento', 'equatorial', 'tropical', 'subtropical', 'massa', 'hamburger', 'sushi', 'churrasco', 'sobremesas']
 
     recomendantion = recommend_data(codeAsProperties[body['pontoTuristico']['codigo'] - 1], codeAsProperties[body['hospedagem']['codigo'] - 1], codeAsProperties[body['clima']['codigo'] - 1], codeAsProperties[body['alimentacao']['codigo'] - 1])
 
     print(recomendantion)
 
     example = {
-            "place":"Rio de Janeiro",
-            "description":"city",
-            "accommodation":"Hotel fasano",
-            "place_to_buy":"decolar"
+            "cidade": recommend_data['cidade'],
+            "ponto": recommend_data['categoria'],
+            "descricao_ponto": recommend_data['descricao_ponto'],
+            "descricao_alimentacao": recommend_data['descricao_alimentacao'],
+            "descricao_hospedagem": recommend_data['descricao_hospedagem'],
             }
+    print(example)
     data = jsonable_encoder(example)
     return JSONResponse(content=data)
 
