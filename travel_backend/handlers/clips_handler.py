@@ -321,7 +321,7 @@ r240 = '(defrule r240 (preferencia (categoria vidanoturna) (hospedagem acampamen
 # alimentacao: massa, churrasco, hamburger, sushi e sobremesas
 def recommend_data(categoria, hospedagem, clima, alimentacao):
     template = environment.find_template('preferencia')
-    fact = template.assert_fact(categoria=clips.Symbol(categoria), hospedagem=clips.Symbol(hospedagem), clima=clips.Symbol(clima), alimentacao=clips.Symbol(alimentacao))
+    template.assert_fact(categoria=clips.Symbol(categoria), hospedagem=clips.Symbol(hospedagem), clima=clips.Symbol(clima), alimentacao=clips.Symbol(alimentacao))
     environment.run()
     recommendation_facts = [fact for fact in environment.facts() if fact.template.name == "recommendation"]
     for recommendation in recommendation_facts:

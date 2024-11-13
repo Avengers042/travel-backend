@@ -1,45 +1,29 @@
-from typing import Any, Sequence
-from fastapi import APIRouter, Depends, HTTPException
+from typing import Any
+from fastapi import APIRouter, Body
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
-from sqlmodel import Session
 
-from database.connection import get_session
-from models.preferences import Preferences
-from repositories import user_repository
-from schemas.user.user_schema import UserSchema
 from handlers.clips_handler import recommend_data
 
 
 router = APIRouter(prefix="/preferences", tags=["preferences"])
 
-
-@router.post(
-    "/",
-    status_code=200,
-    responses={200: {"description": "Problemas nos servidores"}},
-)
-def user_preferences(preferences: Preferences):
-    return preferences
-
 @router.post(
     "/recommendation",
     status_code=200,
-    responses={200: {"description": "Problemas nos servidores"}},
+    responses={400: {"description": "Problemas nos servidores"}},
 )
-def user_preferences_recommendation(body: Any):
-    codeAsProperties = ['natureza', 'cultura', 'cultura e historia', 'aventura', 'vida noturna', 'hotel', 'airbnb', 'hostel', 'acampamento', 'equatorial', 'tropical', 'subtropical', 'massa', 'hamburger', 'sushi', 'churrasco', 'sobremesas']
-
-    recomendantion = recommend_data(codeAsProperties[body['pontoTuristico']['codigo'] - 1], codeAsProperties[body['hospedagem']['codigo'] - 1], codeAsProperties[body['clima']['codigo'] - 1], codeAsProperties[body['alimentacao']['codigo'] - 1])
-
-    print(recomendantion)
+def user_preferences_recommendation(pontoTuristico: dict[str, Any], hospedagem: dict[str, Any], clima: dict[str, Any], alimentacao: dict[str, Any] = Body()):
+    codeAsProperties = ['natureza', 'cultura', 'aventura', 'vidanoturna', 'hotel', 'airbnb', 'hostel', 'acampamento', 'equatorial', 'tropical', 'subtropical', 'massa', 'hamburger', 'sushi', 'churrasco', 'sobremesas']
+    recomendantion = recommend_data(codeAsProperties[pontoTuristico.get("codigo") - 1], codeAsProperties[hospedagem.get("codigo") - 1], codeAsProperties[clima.get("codigo") - 1], codeAsProperties[alimentacao.get("codigo") - 1])
 
     example = {
-            "place":"Rio de Janeiro",
-            "description":"city",
-            "accommodation":"Hotel fasano",
-            "place_to_buy":"decolar"
-            }
+            "cidade": recomendantion['cidade'],
+            "ponto": recomendantion['ponto'],
+            "descricao_ponto": recomendantion['descricao_ponto'],
+            "descricao_alimentacao": recomendantion['descricao_alimentacao'],
+            "descricao_hospedagem": recomendantion['descricao_hospedagem'],
+    }
+
     data = jsonable_encoder(example)
     return JSONResponse(content=data)
-

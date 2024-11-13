@@ -1,19 +1,22 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from middlewares.cors_settings import CORSSettings
 from routers import api
 
+origins = [
+    "http://localhost",
+    "http://localhost:4200",
+    "http://localhost:5000",
+]
 
 app = FastAPI()
-cors = CORSSettings()
 
 app.add_middleware(
-    cors.middleware,
-    allow_origins=cors.origins,
-    allow_credentials=cors.allow_credentials,
-    allow_methods=cors.allow_methods,
-    allow_headers=cors.allow_headers,
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 app.include_router(api.router)
