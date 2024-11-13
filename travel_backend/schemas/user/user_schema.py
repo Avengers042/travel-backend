@@ -1,6 +1,8 @@
-from sqlmodel import SQLModel
+from pydantic import BaseModel
 
 
-class UserSchema(SQLModel):
-    name: str
-    email: str
+class Preferences(BaseModel):
+    pontoTuristico: int
+    hospedagem: int
+    alimentacao: int
+    clima: int
